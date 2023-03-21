@@ -20,9 +20,9 @@ Take note of the password and tokens at the end
 ## DNS settings  
 Replace Kali_Purple_IP with the IP of the VM (If you have the right network settings, you can always access Kibana from within Kali)  
 ### Windows Powershell  
-Add-Content 'C:\Windows\System32\Drivers\etc\hosts' "Kali_Purple_IP kali-purple.kali.purple"  
+`Add-Content 'C:\Windows\System32\Drivers\etc\hosts' "Kali_Purple_IP kali-purple.kali.purple"`  
 ### Linux Bash  
-echo "Kali_-_Purple_IP kali-purple.kali.purple" >> /etc/hosts  
+`echo "Kali_-_Purple_IP kali-purple.kali.purple" >> /etc/hosts`  
 
 ## Improvements  
 Change `echo` to `printf`  
