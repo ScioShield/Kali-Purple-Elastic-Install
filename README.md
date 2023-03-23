@@ -28,3 +28,4 @@ Change `echo` to `printf`
 Normalize all the `curl` calls  
 Place all `--data` sections into their own .json files like in https://github.com/ScioShield/Elastic-Cloud-Agent  
 Think about replacing funky `greps` with `jq`  
+Stop saving passwords to files
