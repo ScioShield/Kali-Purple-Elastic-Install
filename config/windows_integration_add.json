@@ -1,0 +1,130 @@
+{
+  "policy_id": "${WINDOWS_POLICY_ID}",
+  "package": {
+    "name": "windows",
+    "version": "1.17.0"
+  },
+  "name": "windows-1",
+  "description": "",
+  "namespace": "default",
+  "inputs": {
+    "windows-winlog": {
+      "enabled": true,
+      "streams": {
+        "windows.forwarded": {
+          "enabled": true,
+          "vars": {
+            "preserve_original_event": false,
+            "ignore_older": "72h",
+            "language": 0,
+            "tags": [
+              "forwarded"
+            ]
+          }
+        },
+        "windows.powershell": {
+          "enabled": true,
+          "vars": {
+            "preserve_original_event": false,
+            "event_id": "400, 403, 600, 800",
+            "ignore_older": "72h",
+            "language": 0,
+            "tags": []
+          }
+        },
+        "windows.powershell_operational": {
+          "enabled": true,
+          "vars": {
+            "preserve_original_event": false,
+            "event_id": "4103, 4104, 4105, 4106",
+            "ignore_older": "72h",
+            "language": 0,
+            "tags": []
+          }
+        },
+        "windows.sysmon_operational": {
+          "enabled": true,
+          "vars": {
+            "preserve_original_event": false,
+            "ignore_older": "72h",
+            "language": 0,
+            "tags": []
+          }
+        }
+      }
+    },
+    "windows-windows/metrics": {
+      "enabled": true,
+      "streams": {
+        "windows.perfmon": {
+          "enabled": true,
+          "vars": {
+            "perfmon.group_measurements_by_instance": false,
+            "perfmon.ignore_non_existent_counters": false,
+            "perfmon.queries": "- object: \"Process\"\n  instance: [\"*\"]\n  counters:\n   - name: \"% Processor Time\"\n     field: cpu_perc\n     format: \"float\"\n   - name: \"Working Set\"\n",
+            "period": "10s"
+          }
+        },
+        "windows.service": {
+          "enabled": true,
+          "vars": {
+            "period": "60s"
+          }
+        }
+      }
+    },
+    "windows-httpjson": {
+      "enabled": false,
+      "vars": {
+        "url": "https://server.example.com:8089",
+        "ssl": ""
+      },
+      "streams": {
+        "windows.forwarded": {
+          "enabled": false,
+          "vars": {
+            "interval": "10s",
+            "search": "search sourcetype=\"XmlWinEventLog:ForwardedEvents\"",
+            "tags": [
+              "forwarded"
+            ],
+            "preserve_original_event": false
+          }
+        },
+        "windows.powershell": {
+          "enabled": false,
+          "vars": {
+            "interval": "10s",
+            "search": "search sourcetype=\"XmlWinEventLog:Windows PowerShell\"",
+            "tags": [
+              "forwarded"
+            ],
+            "preserve_original_event": false
+          }
+        },
+        "windows.powershell_operational": {
+          "enabled": false,
+          "vars": {
+            "interval": "10s",
+            "search": "search sourcetype=\"XmlWinEventLog:Microsoft-Windows-Powershell/Operational\"",
+            "tags": [
+              "forwarded"
+            ],
+            "preserve_original_event": false
+          }
+        },
+        "windows.sysmon_operational": {
+          "enabled": false,
+          "vars": {
+            "interval": "10s",
+            "search": "search sourcetype=\"XmlWinEventLog:Microsoft-Windows-Sysmon/Operational\"",
+            "tags": [
+              "forwarded"
+            ],
+            "preserve_original_event": false
+          }
+        }
+      }
+    }
+  }
+}

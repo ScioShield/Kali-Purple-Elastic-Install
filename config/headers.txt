@@ -1,0 +1,5 @@
+Accept: */*
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Type: application/json
+kbn-xsrf: reporting

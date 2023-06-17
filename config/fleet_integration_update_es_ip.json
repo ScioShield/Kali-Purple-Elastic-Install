@@ -1,0 +1,12 @@
+{
+"name": "default",
+"type": "elasticsearch",
+"is_default": true,
+"is_default_monitoring": true,
+"hosts": [
+  "https://${IP_ADDR}:${ES_PORT}"
+  ],
+"ca_sha256": "",
+"ca_trusted_fingerprint": "",
+"config_yaml": "ssl.certificate_authorities: [\"/opt/Elastic/ca.crt\"]"
+}

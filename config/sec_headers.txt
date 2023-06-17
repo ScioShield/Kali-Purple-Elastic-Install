@@ -1,0 +1,9 @@
+Accept: */*
+Accept-Language: en-US,en;q=0.9
+Connection: keep-alive
+Content-Type: application/json
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+kbn-version: ${VER}
+kbn-xsrf: reporting

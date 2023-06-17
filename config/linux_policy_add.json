@@ -1,0 +1,9 @@
+{
+  "name": "Linux",
+  "description": "",
+  "namespace": "default",
+  "monitoring_enabled": [
+    "logs",
+    "metrics"
+  ]
+}

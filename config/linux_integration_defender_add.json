@@ -1,0 +1,29 @@
+{
+  "name": "Elastic Defend - Linux",
+  "description": "",
+  "namespace": "default",
+  "policy_id": "${LINUX_POLICY_ID}",
+  "enabled": true,
+  "inputs": [
+    {
+      "enabled": true,
+      "streams": [],
+      "type": "ENDPOINT_INTEGRATION_CONFIG",
+      "config": {
+        "_config": {
+          "value": {
+            "type": "endpoint",
+            "endpointConfig": {
+              "preset": "EDRComplete"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "package": {
+    "name": "endpoint",
+    "title": "Elastic Defend",
+    "version": "${VER}"
+  }
+}

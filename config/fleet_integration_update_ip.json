@@ -1,0 +1,23 @@
+{
+  "package": {
+    "name": "fleet_server",
+    "version": "1.2.0"
+  },
+  "name": "fleet_server-1",
+  "namespace": "default",
+  "description": "",
+  "policy_id": "${FLEET_POLICY_ID}",
+  "inputs": {
+    "fleet_server-fleet-server": {
+      "enabled": true,
+      "vars": {
+        "host": "${IP_ADDR}",
+        "port": [
+          8220
+        ],
+        "custom": "ssl.certificate_authorities: [\"/opt/Elastic/ca.crt\"]"
+      },
+      "streams": {}
+    }
+  }
+}

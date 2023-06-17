@@ -1,0 +1,29 @@
+{
+  "policy_id": "${LINUX_POLICY_ID}",
+  "package": {
+    "name": "auditd",
+    "version": "3.5.0"
+  },
+  "name": "auditd-1",
+  "description": "",
+  "namespace": "default",
+  "inputs": {
+    "auditd-logfile": {
+      "enabled": true,
+      "streams": {
+        "auditd.log": {
+          "enabled": true,
+          "vars": {
+            "paths": [
+              "/var/log/audit/audit.log*"
+            ],
+            "tags": [
+              "auditd-log"
+            ],
+            "preserve_original_event": false
+          }
+        }
+      }
+    }
+  }
+}
