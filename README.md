@@ -48,7 +48,7 @@ Some background Fleet Policies house the integrations we enable, I've separated 
 
 This separation allows for targeted integrations to apply to only one major platform at a time, this can be subdivided further so a "Linux - Apache", "Linux - SQLite", "Windows - IIS" etc. but for our purposes this division allows enough segregation.  
 #### Fleet Integrations
-The intigrations we enable are as follows;  
+The integrations we enable are as follows;  
 **Windows**  
 - Windows integration, this is used to gather logs from the Windows hosts, like the event viewer logs.  
 - Windows integration custom, this is used to get the custom logs produced by Windows Defender.  
