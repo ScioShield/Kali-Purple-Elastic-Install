@@ -20,6 +20,7 @@ apt install -y jq
 
 # var settings
 export VER=8.8.0
+# Change this IP address to the interface that Agents will connect to
 export IP_ADDR=10.0.2.15
 export K_PORT=5601
 export ES_PORT=9200
