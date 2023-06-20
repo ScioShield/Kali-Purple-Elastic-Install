@@ -106,7 +106,7 @@ cat > /etc/elasticsearch/elasticsearch.yml << EOF
 path.data: /var/lib/elasticsearch
 path.logs: /var/log/elasticsearch
 # ---------------------------------- Network -----------------------------------
-network.host: $IP_ADDR
+network.host: 0.0.0.0
 http.port: $ES_PORT
 # --------------------------------- Discovery ----------------------------------
 discovery.type: single-node
