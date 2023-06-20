@@ -64,4 +64,4 @@ Replace Kali_Purple_IP with the IP of the VM (If you have the right network sett
 `echo "Kali_Purple_IP kali-purple.kali.purple" >> /etc/hosts`  
 
 ## Improvements  
-Think about creating a certs dir again and move the CA there so a python server can be used to distribute the Agent, tokens and cert?
+Write examples to install the Agent on Windows and Linux with a python server
