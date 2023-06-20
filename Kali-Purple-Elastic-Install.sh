@@ -28,7 +28,7 @@ export DNS=kali-purple.kali.purple
 
 echo "$IP_ADDR $DNS" >> /etc/hosts
 
-mkdir /opt/Elastic/
+mkdir /opt/elastic/
 
 download_and_verify() {
   local url="$1"
@@ -92,8 +92,9 @@ cp /tmp/certs/ca/ca.crt /tmp/certs/kibana/* /etc/kibana/certs
 cp /tmp/certs/ca/ca.crt /tmp/certs/fleet/* /etc/pki/fleet
 cp -r /tmp/certs/* /root/
 
-# This cp should be an unaliased cp to replace the ca.crt if it exists in the shared /opt/Elastic dir
-cp -u /tmp/certs/ca/ca.crt /opt/Elastic
+# This cp should be an unaliased cp to replace the ca.crt if it exists in the ./certs/ and /opt/elastic dirs
+cp -u /tmp/certs/ca/ca.crt /opt/elastic/
+cp -u /tmp/certs/ca/ca.crt ./certs/
 
 # Config and start Elasticsearch (we are also increasing the timeout for systemd to 500)
 mv /etc/elasticsearch/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml.bak
@@ -163,7 +164,7 @@ systemctl enable kibana
 
 # Var settings (has to happen after Elastic is installed)
 E_PASS=$(sudo grep "generated password for the elastic" /root/ESUpass.txt | awk '{print $11}')
-grep "generated password for the elastic" /root/ESUpass.txt | awk '{print $11}' > /opt/Elastic/Password.txt
+grep "generated password for the elastic" /root/ESUpass.txt | awk '{print $11}' > /opt/elastic/Password.txt
 
 # Test if Kibana is running
 echo "Testing if Kibana is online, could take some time, no more than 5 mins"
@@ -195,8 +196,6 @@ jq --raw-output '.item.id' /root/FPid.txt > ./keys/FPid.txt
 
 # Get the policy key
 export FLEET_POLICY_ID=$(cat ./keys/FPid.txt)
-#curl --silent --cacert /tmp/certs/ca/ca.crt -XGET "https://$DNS:$K_PORT/api/fleet/agent_policies" -H 'accept: application/json' -u elastic:$E_PASS > /root/Pid.txt
-#cat /root/FPid.txt | sed "s/\},{/'\n'/g" | grep "Fleet Policy" | grep -oP '[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}' > /opt/Elastic/FPid.txt
 
 # Add Fleet Integration
 curl --silent -XPOST \
@@ -348,7 +347,7 @@ sudo /opt/elastic-agent-$VER-linux-x86_64/elastic-agent install -f --url=https:/
  --fleet-server-es=https://$DNS:$ES_PORT \
  --fleet-server-service-token=$(cat ./tokens/Ftoken.txt) \
  --fleet-server-policy=$(cat ./keys/FPid.txt) \
- --certificate-authorities=/opt/Elastic/ca.crt \
+ --certificate-authorities=/opt/elastic/ca.crt \
  --fleet-server-es-ca=/etc/pki/fleet/ca.crt \
  --fleet-server-cert=/etc/pki/fleet/fleet.crt \
  --fleet-server-cert-key=/etc/pki/fleet/fleet.key
@@ -360,8 +359,9 @@ curl --silent --cacert /tmp/certs/ca/ca.crt -XGET "https://$DNS:$K_PORT/api/flee
 
 echo "To log into KLibana go to https://$DNS:$K_PORT"
 echo "Username: elastic"
-echo "Password: $(cat /opt/Elastic/Password.txt)"
-echo "Password is saved in /opt/Elastic/Password.txt"
+echo "Password: $(cat /opt/elastic/Password.txt)"
+echo "Password is saved in /opt/elastic/Password.txt"
+echo "The CA cert is in ./certs/"
 echo "Tokens are saved in ./tokens/"
 echo "To enroll Linux agents use this token: $(cat ./tokens/LAEtoken.txt)"
 echo "To enroll Windows agents use this token: $(cat ./tokens/WAEtoken.txt)"

@@ -8,5 +8,5 @@
   ],
 "ca_sha256": "",
 "ca_trusted_fingerprint": "",
-"config_yaml": "ssl.certificate_authorities: [\"/opt/Elastic/ca.crt\"]"
+"config_yaml": "ssl.certificate_authorities: [\"/opt/elastic/ca.crt\"]"
 }

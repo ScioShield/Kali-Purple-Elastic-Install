@@ -15,7 +15,7 @@
         "port": [
           8220
         ],
-        "custom": "ssl.certificate_authorities: [\"/opt/Elastic/ca.crt\"]"
+        "custom": "ssl.certificate_authorities: [\"/opt/elastic/ca.crt\"]"
       },
       "streams": {}
     }
