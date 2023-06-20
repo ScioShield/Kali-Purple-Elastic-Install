@@ -15,7 +15,18 @@ This should never be done in prod!
 Use `get clone` to download this script  
 Run with `sudo bash Kali-Purple-Elastic-Install.sh` to install  
 Take note of the password and tokens at the end  
-**The script has been updated so now conforms with my other script structure.**
+**The script has been updated so now conforms with my other script structure.**  
+### Install an Elastic Agent on remote systems  
+**Linux**  
+On the Kali-Purple host  
+Run a Python HTTP server in the directory you ran the `Kali-Purple-Elastic-Install.sh` script from.  
+`python3 -m http.server`  
+On the remote Linux host  
+Copy the `Linux-Install-Agent-Remote.sh` script (Remember to change the [ES_IP_ADDR](https://github.com/ScioShield/Kali-Purple-Elastic-Install/blob/151df3a1bba02f26b6255df120feb150a676b367/Linux-Install-Agent-Remote.sh#LL6C33-L6C33) to the correct address for you) you can use `curl`, `wget` or a good old copy paste. Note the script expects `wget` to be present on the remote host, install with `sudo apt install wget` or `sudo yum install wget`.  
+Now run the script with `sudo bash Linux-Install-Agent-Remote.sh`, the script downloads all required items; the agent, the enrollment token, and the CA certificate from the Kali-Purple host. It has sanity checks to make sure Kibana is reachable from where it's running from.  
+On the Kali-Purple host  
+It is now safe to stop the Python HTTP server `Ctrl+c` in the window you ran it from to stop the server.  
+
 
 ## Explanation
 The script installs ElasticSearch, Kibana, and Fleet in a "non-development" mode (main security settings like TLS, and Kibana sec keys, etc).  
@@ -53,7 +64,7 @@ We automatically enable all alerts for the Windows and Linux platforms (or at le
 #### Fleet Server
 The fleet server is then enabled by installing the Elastic Agent with specific settings.
 #### Enrollment Tokens
-We place them in the ./tokens dir and print them. You will also need the CA cert located in the /opt/Elastic/ dir to enroll new agents. Here is an example for [Windows](https://github.com/ScioShield/AtomicFireFly/blob/2ecbd6d6ee7754539ac2419af1a557e14a51c8ec/AWBootstrap.ps1#L16) here is an example for [Linux](https://github.com/ScioShield/AtomicFireFly/blob/2ecbd6d6ee7754539ac2419af1a557e14a51c8ec/ALBootstrap.sh#L16).  
+We place them in the ./tokens dir and print them. You will also need the CA cert located in the /opt/Elastic/ or ./certs/ dir to enroll new agents. Here is an example for [Windows](https://github.com/ScioShield/AtomicFireFly/blob/2ecbd6d6ee7754539ac2419af1a557e14a51c8ec/AWBootstrap.ps1#L16) here is an example for [Linux](https://github.com/ScioShield/AtomicFireFly/blob/2ecbd6d6ee7754539ac2419af1a557e14a51c8ec/ALBootstrap.sh#L16).  
 
 
 ## DNS settings  
