@@ -358,7 +358,7 @@ curl --silent --cacert /tmp/certs/ca/ca.crt -XGET "https://$DNS:$K_PORT/api/flee
 # Get the Linux policy id
 curl --silent --cacert /tmp/certs/ca/ca.crt -XGET "https://$DNS:$K_PORT/api/fleet/enrollment_api_keys" -H 'accept: application/json' -u elastic:$E_PASS | sed -e "s/\},{/'\n'/g" -e "s/items/'\n'/g" | grep -E -m1 $(cat ./keys/LPid.txt) | grep -oP '[a-zA-Z0-9\=]{40,}' > ./tokens/LAEtoken.txt
 
-echo "To log into KLibana go to https://$DNS:$K_PORT"
+echo "To log into Kibana go to https://$DNS:$K_PORT"
 echo "Username: elastic"
 echo "Password: $(echo $E_PASS)"
 echo "SAVE THE PASSWORD!"
