@@ -35,7 +35,7 @@ Now you can run the script either with copy paste into an Administrator PowerShe
 On the Kali-Purple host  
 It is now safe to stop the Python HTTP server `Ctrl+c` in the window you ran it from to stop the server.  
 **Kibana**  
-Now look under the Fleet page to make sure it worked `https://kali-purple.kali.purple:5601/app/fleet/agents` check the logs tab of any of the Agents, if there are no logs then there is a connectivity issue between the Agent and the ElasticSearch endpoint. 
+Now look under the Fleet page to make sure it worked `https://kali-purple.kali.purple:5601/app/fleet/agents` check the logs tab of any of the Agents, if there are no logs in the logs tab then there is a connectivity issue between the Agent and the ElasticSearch endpoint. 
 **Agent**  
 If the Fleet server has issues please first try a restart with `sudo /usr/bin/elastic-agent restart` and a `sudo /usr/bin/elastic-agent status` and `sudo systemctl status elastic-agent` on the Kali Purple host. If there are connection issues it is most probably related to the certificate settings.  
 
