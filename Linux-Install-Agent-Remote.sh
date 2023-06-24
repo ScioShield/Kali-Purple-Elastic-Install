@@ -11,9 +11,15 @@ echo "$ES_IP_ADDR $DNS" >> /etc/hosts
 mkdir /opt/elastic/
 
 # Donwload all needed items
-wget $DNS:8000/apps/elastic-agent-$VER-linux-x86_64.tar.gz -P /opt/elastic/
-wget $DNS:8000/certs/ca.crt -P /opt/elastic/
-wget $DNS:8000/tokens/LAEtoken.txt -P /opt/elastic/
+if type -P wget &> /dev/null; then
+    wget $DNS:8000/apps/elastic-agent-$VER-linux-x86_64.tar.gz -P /opt/elastic/
+    wget $DNS:8000/certs/ca.crt -P /opt/elastic/
+    wget $DNS:8000/tokens/LAEtoken.txt -P /opt/elastic/
+else
+    curl $DNS:8000/apps/elastic-agent-$VER-linux-x86_64.tar.gz -o /opt/elastic/elastic-agent-$VER-linux-x86_64.tar.gz
+    curl $DNS:8000/certs/ca.crt -o /opt/elastic/ca.crt
+    curl $DNS:8000/tokens/LAEtoken.txt -o /opt/elastic/LAEtoken.txt
+fi
 
 # unpack the agent
 tar -xf /opt/elastic/elastic-agent-$VER-linux-x86_64.tar.gz -C /opt/elastic/
