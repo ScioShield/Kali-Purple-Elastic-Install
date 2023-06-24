@@ -86,4 +86,3 @@ Replace Kali_Purple_IP with the IP of the VM (If you have the right network sett
 `echo "Kali_Purple_IP kali-purple.kali.purple" >> /etc/hosts`  
 
 ## Improvements  
-Write examples to install the Agent on Windows and Linux with a python server
