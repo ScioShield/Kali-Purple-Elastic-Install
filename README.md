@@ -7,9 +7,8 @@ Elastic advise at least 8 GB for Elasticsearch, however you can reduce the VM to
 
 ## Note  
 This has been tested for Elastic 8.8.0 on Kali-Purple 2023.2a  
-This is not for production!  
-Please use as a guide only, I do things like placing the `elastic` user password in a file  
-This should never be done in prod!   
+**This is not for production!**  
+**Please use as a guide / lab only!**
 
 ## Instructions  
 Use `get clone` to download this script  
@@ -36,8 +35,9 @@ Now you can run the script either with copy paste into an Administrator PowerShe
 On the Kali-Purple host  
 It is now safe to stop the Python HTTP server `Ctrl+c` in the window you ran it from to stop the server.  
 **Kibana**  
-Now look under the Fleet page to make sure it worked `https://kali-purple.kali.purple:5601/app/fleet/agents`  
-
+Now look under the Fleet page to make sure it worked `https://kali-purple.kali.purple:5601/app/fleet/agents` check the logs tab of any of the Agents, if there are no logs then there is a connectivity issue between the Agent and the ElasticSearch endpoint. 
+**Agent**  
+If the Fleet server has issues please first try a restart with `sudo /usr/bin/elastic-agent restart` and a `sudo /usr/bin/elastic-agent status` and `sudo systemctl status elastic-agent` on the Kali Purple host. If there are connection issues it is most probably related to the certificate settings.  
 
 ## Explanation
 The script installs ElasticSearch, Kibana, and Fleet in a "non-development" mode (main security settings like TLS, and Kibana sec keys, etc).  

@@ -165,7 +165,7 @@ systemctl enable kibana
 
 # Var settings (has to happen after Elastic is installed)
 E_PASS=$(sudo grep "generated password for the elastic" /root/ESUpass.txt | awk '{print $11}')
-grep "generated password for the elastic" /root/ESUpass.txt | awk '{print $11}' > /opt/elastic/Password.txt
+#grep "generated password for the elastic" /root/ESUpass.txt | awk '{print $11}' > /opt/elastic/Password.txt
 
 # Test if Kibana is running
 echo "Testing if Kibana is online, could take some time, no more than 5 mins"
@@ -360,8 +360,10 @@ curl --silent --cacert /tmp/certs/ca/ca.crt -XGET "https://$DNS:$K_PORT/api/flee
 
 echo "To log into KLibana go to https://$DNS:$K_PORT"
 echo "Username: elastic"
-echo "Password: $(cat /opt/elastic/Password.txt)"
-echo "Password is saved in /opt/elastic/Password.txt"
+echo "Password: $(echo $E_PASS)"
+echo "SAVE THE PASSWORD!"
+echo "If you didn't save this password you can reset the Elastic users' password with this command:"
+echo "/usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic"
 echo "The CA cert is in ./certs/"
 echo "Tokens are saved in ./tokens/"
 echo "To enroll Linux agents use this token: $(cat ./tokens/LAEtoken.txt)"
